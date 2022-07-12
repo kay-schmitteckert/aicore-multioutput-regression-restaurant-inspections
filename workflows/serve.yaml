@@ -16,7 +16,7 @@ spec:
     artifacts:
     # Name for the trained model. Must not include hyphens (-), otherwise error is thrown.
     # Make sure the same name is used in line 43.
-      - name: inspection-mo-regression-model
+      - name: inspectionMoRegressionModel
   template:
     apiVersion: "serving.kubeflow.org/v1beta1"
     metadata:
@@ -40,4 +40,4 @@ spec:
               protocol: TCP
           env:
             - name: STORAGE_URI
-              value: "{{inputs.artifacts.inspection-mo-regression-model}}"
+              value: "{{inputs.artifacts.inspectionMoRegressionModel}}"
