@@ -2,6 +2,7 @@
 
 from os.path import exists
 from os import environ
+from typing import List
 import logging
 import joblib
 import lightgbm as lgb
@@ -24,7 +25,7 @@ DATASET_PREPROCESSED_NAME = "inspections_preprocessed.csv"
 
 cache_preprocessing = True
 
-def preprocess(features_categorical: list[str], features_embeddings: list[str], labels: list[str]) -> pd.DataFrame:
+def preprocess(features_categorical: List[str], features_embeddings: List[str], labels: List[str]) -> pd.DataFrame:
     
     """
     READ & TRANSFORM DATA
