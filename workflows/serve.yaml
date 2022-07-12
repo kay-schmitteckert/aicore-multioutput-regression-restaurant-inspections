@@ -34,7 +34,7 @@ spec:
         maxReplicas: 5
         containers:
         - name: kfserving-container
-          image: "docker.io/kayschmitteckert/inspection-mo-regression-cpu-serve:0.0.1"
+          image: docker.io/kayschmitteckert/inspection-mo-regression-cpu-serve:0.0.1
           ports:
             - containerPort: 9001
               protocol: TCP
