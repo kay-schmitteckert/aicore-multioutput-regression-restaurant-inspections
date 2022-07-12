@@ -3,13 +3,12 @@ kind: ServingTemplate
 metadata:
   name: inspection-mo-regression-infer-0 # Executable ID (max length 64 lowercase-hypen-separated), please modify this to any value if you are not the only user of your SAP AI Core instance. Example: `text-clf-infer-tutorial-1234`
   annotations:
-    scenarios.ai.sap.com/description: "Train and serve a multioutput regressionression model."
-    scenarios.ai.sap.com/name: inspection-mo-regression-scenario-name
     executables.ai.sap.com/description: "Serve a multioutput regressionression model."
     executables.ai.sap.com/name: inspection-mo-regression-infer-exec
   labels:
+    executables.ai.sap.com/id: inspection-mo-regression-infer-0
     scenarios.ai.sap.com/id: inspection-mo-regression-scenario # Unique ID for the AI scenario.
-    ai.sap.com/version: "0.0.1"
+    ai.sap.com/version: 0.0.1
 spec:
   inputs:
     parameters: []
@@ -29,8 +28,8 @@ spec:
               name: kfserving-container
               image: docker.io/kayschmitteckert/inspection-mo-regression-cpu-serve:0.0.1
               ports:
-              - containerPort: 9001
-                protocol: TCP
+                - containerPort: 9001
+                  protocol: TCP
               env:
-              - name: STORAGE_URI
-                value: "{{inputs.artifacts.inspectionMoRegressionModel}}"
+                - name: STORAGE_URI
+                  value: "{{inputs.artifacts.inspectionMoRegressionModel}}"
