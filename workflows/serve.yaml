@@ -30,7 +30,7 @@ spec:
               image: docker.io/kayschmitteckert/inspection-mo-regression-cpu-serve:0.0.1
               ports:
               - containerPort: 9001
-                  protocol: TCP
+                protocol: TCP
               env:
               - name: STORAGE_URI
-                  value: "{{inputs.artifacts.inspectionMoRegressionModel}}"
+                value: "{{inputs.artifacts.inspectionMoRegressionModel}}"
