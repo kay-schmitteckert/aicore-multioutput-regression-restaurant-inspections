@@ -14,7 +14,7 @@ metadata:
     ai.sap.com/version: "0.0.1"
 spec:
   imagePullSecrets:
-    - name: docker-regressionistry-secret # Name of Docker regressionistry secret.
+    - name: docker-registry-secret # Name of Docker regressionistry secret.
   entrypoint: inspection-mo-regression-training
   templates:
     - name: inspection-mo-regression-training
