@@ -1,6 +1,7 @@
 """Model serving example"""
 
 from os.path import exists
+from typing import Dict
 import joblib
 import pandas as pd
 from flask import Flask, request
@@ -41,7 +42,7 @@ def init():
 
     return None
 
-def prepare_input_data(input_data: dict) -> pd.DataFrame:
+def prepare_input_data(input_data: Dict) -> pd.DataFrame:
     FEATURES_CATEGORICAL = ["business_name", "business_postal_code"]
     FEATURES_EMBEDDINGS = ["violation_description"]
 
