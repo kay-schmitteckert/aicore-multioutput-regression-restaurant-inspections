@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: WorkflowTemplate
 metadata:
-  name:  inspection-mo-regression-train-0 # Executable ID (max length 64 lowercase-hypen-separated), please modify this to any value if you are not the only user of your SAP AI Core instance. Example: `text-clf-train-tutorial-1234`
+  name: inspection-mo-regression-train-0 # Executable ID (max length 64 lowercase-hypen-separated), please modify this to any value if you are not the only user of your SAP AI Core instance. Example: `text-clf-train-tutorial-1234`
   annotations:
     scenarios.ai.sap.com/description: "Train and serve a multioutput regressionression model."
     scenarios.ai.sap.com/name: inspection-mo-regression-scenario
@@ -10,7 +10,7 @@ metadata:
     artifacts.ai.sap.com/inspections.kind: "dataset"
     artifacts.ai.sap.com/inspection-mo-regression-model.kind: "model"
   labels:
-    scenarios.ai.sap.com/id: inspection-mo-regression # Unique ID for the AI scenario.
+    scenarios.ai.sap.com/id: inspection-mo-regression-scenario # Unique ID for the AI scenario.
     ai.sap.com/version: "0.0.1"
 spec:
   imagePullSecrets:

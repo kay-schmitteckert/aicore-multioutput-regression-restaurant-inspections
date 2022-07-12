@@ -59,7 +59,7 @@ def preprocess(features_categorical: List[str], features_embeddings: List[str], 
         
     return inspections_processed
 
-def train(inspections_processed: pd.DataFrame, labels: list[str]):
+def train(inspections_processed: pd.DataFrame, labels: List[str]):
     
     Y = inspections_processed[labels]
     X = inspections_processed.drop(labels, axis=1)
