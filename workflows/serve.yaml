@@ -18,26 +18,19 @@ spec:
     # Make sure the same name is used in line 43.
       - name: inspectionMoRegressionModel
   template:
-    apiVersion: "serving.kubeflow.org/v1beta1"
-    metadata:
-      annotations: |
-        autoscaling.knative.dev/metric: concurrency
-        autoscaling.knative.dev/target: 1
-        autoscaling.knative.dev/targetBurstCapacity: 0
-      labels: |
-        ai.sap.com/resourcePlan: basic
     spec: |
-      predictor:
-        imagePullSecrets:
-          - name: docker-registry-secret
-        minReplicas: 1
-        maxReplicas: 5
-        containers:
-        - name: kfserving-container
-          image: docker.io/kayschmitteckert/inspection-mo-regression-cpu-serve:0.0.1
-          ports:
-            - containerPort: 9001
-              protocol: TCP
-          env:
-            - name: STORAGE_URI
-              value: "{{inputs.artifacts.inspectionMoRegressionModel}}"
+      default:
+        predictor:
+          imagePullSecrets:
+            - name: docker-registry-secret
+          minReplicas: 1
+          custom:
+            containers:
+            - name: kfserving-container
+              image: docker.io/kayschmitteckert/inspection-mo-regression-cpu-serve:0.0.1
+              ports:
+              - containerPort: 9001
+                  protocol: TCP
+              env:
+              - name: STORAGE_URI
+                  value: "{{inputs.artifacts.inspectionMoRegressionModel}}"
