@@ -17,16 +17,16 @@ spec:
     # Name for the trained model. Must not include hyphens (-), otherwise error is thrown.
     # Make sure the same name is used in line 43.
       - name: inspectionMoRegressionModel
+  imagePullSecrets:
+    - name: docker-registry-secret
   template:
     spec: |
       default:
         predictor:
-          imagePullSecrets:
-            - name: docker-registry-secret
           minReplicas: 1
           custom:
-            containers:
-            - name: kfserving-container
+            container:
+              name: kfserving-container
               image: docker.io/kayschmitteckert/inspection-mo-regression-cpu-serve:0.0.1
               ports:
               - containerPort: 9001
