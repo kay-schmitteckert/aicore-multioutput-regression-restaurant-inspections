@@ -1,5 +1,3 @@
-"""Model training example."""
-
 from os.path import exists
 from os import environ
 from typing import List
@@ -41,9 +39,11 @@ def preprocess(features_categorical: List[str], features_embeddings: List[str], 
     ENCODE CATEGORICAL FEATURES
     """
     logging.info("ENCODE CATEGORICAL FEATURES")
-    ordincal_encoder: OrdinalEncoder = OrdinalEncoder()
+    ordincal_encoder: OrdinalEncoder = OrdinalEncoder(handle_unknown='use_encoded_value', unknown_value=-1)
     inspections_processed[features_categorical] = ordincal_encoder.fit_transform(inspections[features_categorical].values)
     inspections_processed[features_categorical] = inspections_processed[features_categorical].astype('category')
+
+    # Save the encoder to disk in the filesystem of the docker container.
     joblib.dump(ordincal_encoder, open(f"{MODEL_OUTPUT_PATH}/{ENCODER_NAME}", "wb"))
 
     """

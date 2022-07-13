@@ -13,8 +13,8 @@ spec:
   inputs:
     parameters: []
     artifacts:
-    # Name for the trained model. Must not include hyphens (-), otherwise error is thrown.
-    # Make sure the same name is used in line 43.
+      # Name for the trained model. Must not include hyphens (-), otherwise error is thrown.
+      # Make sure the same name is used in line 43.
       - name: inspectionMoRegressionModel
   imagePullSecrets:
     - name: docker-registry-secret

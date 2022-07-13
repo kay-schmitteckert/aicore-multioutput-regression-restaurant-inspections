@@ -1,7 +1,5 @@
-"""Model serving example"""
-
 from os.path import exists
-from typing import Dict
+from typing import List
 import joblib
 import pandas as pd
 from flask import Flask, request
@@ -11,7 +9,9 @@ from sentence_transformers import SentenceTransformer
 
 app = Flask(__name__)
 
-sentence_transformer: SentenceTransformer = SentenceTransformer("multi-qa-MiniLM-L6-cos-v1")
+RESOURCE_GROUP = "restaurant-inspections"
+
+sentence_transformer: SentenceTransformer = SentenceTransformer("multi-qa-MiniLM-L6-cos-v1", cache_folder="/app/.cache")
 regr_model: MultiOutputRegressor
 ordinal_encoder: OrdinalEncoder
 
@@ -36,13 +36,13 @@ def init():
 
     if exists(ENCODER_PATH):
         print(f"Loading encoder model from {ENCODER_PATH}")
-        regr_model = joblib.load(ENCODER_PATH)
+        ordinal_encoder = joblib.load(ENCODER_PATH)
     else:
         raise FileNotFoundError(ENCODER_PATH)
 
     return None
 
-def prepare_input_data(input_data: Dict) -> pd.DataFrame:
+def prepare_input_data(input_data: List) -> pd.DataFrame:
     FEATURES_CATEGORICAL = ["business_name", "business_postal_code"]
     FEATURES_EMBEDDINGS = ["violation_description"]
 
@@ -70,18 +70,16 @@ def prepare_input_data(input_data: Dict) -> pd.DataFrame:
     
     return inspections_processed
 
-@app.route("/v1/models/{}:predict".format("regrmodel"), methods=["POST"])
+@app.route("/v1/models/{}:predict".format(RESOURCE_GROUP), methods=["POST"])
 def predict():
     "Make the model available for inference requests."
-    input_data: pd.DataFrame = prepare_input_data(dict(request.json))
-    prediction = regr_model.predict([input_data["text"]])
-    output = {"predictions": prediction}
+    data: pd.DataFrame = prepare_input_data(list(dict(request.json)["payload"]))  # type: ignore
+    predictions = regr_model.predict(data.values).tolist()
+    response = {"predictions": predictions}
 
-    return output
+    return response
 
 
 if __name__ == "__main__":
     init()
     app.run(host="0.0.0.0", debug=True, port=9001)
-
-# curl --location --request POST 'http://localhost:9001/v1/models/regrmodel:predict' --header 'Content-Type: application/json' --data-raw '{"text": "A restaurant with great ambiance"}'

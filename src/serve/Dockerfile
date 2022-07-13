@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y libgomp1
 RUN pip3 install --upgrade pip
 COPY requirements.txt ./requirements.txt
 # --no-cache-dir
-RUN pip3 install -r requirements.txt 
+RUN pip3 install -r requirements.txt --no-cache-dir
 
 RUN mkdir -p /app/src/ && \
     mkdir -p /app/.cache
