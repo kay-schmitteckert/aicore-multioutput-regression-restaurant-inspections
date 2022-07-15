@@ -4,33 +4,38 @@ import joblib
 import pandas as pd
 from flask import Flask, request
 from sklearn.multioutput import MultiOutputRegressor
-from sklearn.preprocessing import OrdinalEncoder
+from sklearn.preprocessing import OrdinalEncoder, StandardScaler
 from sentence_transformers import SentenceTransformer
 
 app = Flask(__name__)
 
 RESOURCE_GROUP = "restaurant-inspections"
+MODEL_OUTPUT_PATH = "/mnt/models"
+MODEL_NAME = "inspection-mo-regression-model.pickle"
+ENCODER_NAME = "ord-enc.pickle"
+SCALER_NAME = "standard_scaler.pickle"
 
 sentence_transformer: SentenceTransformer = SentenceTransformer("multi-qa-MiniLM-L6-cos-v1", cache_folder="/app/.cache")
-regr_model: MultiOutputRegressor
+multi_output_regressor: MultiOutputRegressor
 ordinal_encoder: OrdinalEncoder
+scaler: StandardScaler
 
 @app.before_first_request
 def init():
     """
     Load the model if it is available locally
     """
-    global regr_model
+    global multi_output_regressor
     global ordinal_encoder
-    MODEL_OUTPUT_PATH = "/mnt/models"
-    MODEL_NAME = "inspection-mo-regression-model.pickle"
-    ENCODER_NAME = "ord-enc.pickle"
+    global scaler
+
     MODEL_PATH = f"{MODEL_OUTPUT_PATH}/{MODEL_NAME}"
     ENCODER_PATH = f"{MODEL_OUTPUT_PATH}/{ENCODER_NAME}"
+    SCALER_PATH = f"{MODEL_OUTPUT_PATH}/{SCALER_NAME}"
 
     if exists(MODEL_PATH):
-        print(f"Loading regression model from {MODEL_PATH}")
-        regr_model = joblib.load(MODEL_PATH)
+        print(f"Loading multi-output regressor model from {MODEL_PATH}")
+        multi_output_regressor = joblib.load(MODEL_PATH)
     else:
         raise FileNotFoundError(MODEL_PATH)
 
@@ -40,14 +45,18 @@ def init():
     else:
         raise FileNotFoundError(ENCODER_PATH)
 
-    return None
+    if exists(SCALER_PATH):
+        print(f"Loading scaler model from {SCALER_PATH}")
+        scaler = joblib.load(SCALER_PATH)
+    else:
+        raise FileNotFoundError(SCALER_PATH)
 
 def prepare_input_data(input_data: List) -> pd.DataFrame:
-    FEATURES_CATEGORICAL = ["business_name", "business_postal_code"]
+    FEATURES_CATEGORICAL = ["business_postal_code"]
     FEATURES_EMBEDDINGS = ["violation_description"]
 
     inspections = pd.DataFrame.from_records(input_data)
-    inspections = inspections[["business_name", "business_postal_code", "violation_description"]]
+    inspections = inspections[["business_postal_code", "violation_description"]]
 
     inspections_processed = pd.DataFrame()
 
@@ -74,8 +83,9 @@ def prepare_input_data(input_data: List) -> pd.DataFrame:
 def predict():
     "Make the model available for inference requests."
     data: pd.DataFrame = prepare_input_data(list(dict(request.json)["payload"]))  # type: ignore
-    predictions = regr_model.predict(data.values).tolist()
-    response = {"predictions": predictions}
+    predictions_scaled = multi_output_regressor.predict(data.values)
+    predictions = scaler.inverse_transform(predictions_scaled)
+    response = {"predictions": predictions.tolist()}
 
     return response
 

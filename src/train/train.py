@@ -7,7 +7,7 @@ import lightgbm as lgb
 import pandas as pd
 from sentence_transformers import SentenceTransformer
 from sklearn.multioutput import MultiOutputRegressor
-from sklearn.preprocessing import OrdinalEncoder
+from sklearn.preprocessing import OrdinalEncoder, StandardScaler
 
 FORMAT = "%(asctime)s:%(name)s:%(levelname)s - %(message)s"
 # Potentially log info during training.
@@ -18,10 +18,12 @@ MODEL_OUTPUT_PATH = environ["OUTPUT_PATH"]
 
 MODEL_NAME = "inspection-mo-regression-model.pickle"
 ENCODER_NAME = "ord-enc.pickle"
+SCALER_NAME = "standard_scaler.pickle"
+
 DATASET_NAME = "inspections.csv"
 DATASET_PREPROCESSED_NAME = "inspections_preprocessed.csv"
 
-cache_preprocessing = True
+cache_preprocessing = False
 
 def preprocess(features_categorical: List[str], features_embeddings: List[str], labels: List[str]) -> pd.DataFrame:
     
@@ -33,7 +35,12 @@ def preprocess(features_categorical: List[str], features_embeddings: List[str], 
     logging.info(f"TRAIN A MultiOutputRegressor USING {len(inspections)} RECORDS")
 
     inspections_processed = pd.DataFrame()
-    inspections_processed[labels] = inspections[labels]
+    """
+    SCALE TARGETS
+    """
+    scaler: StandardScaler = StandardScaler()
+    inspections_processed[labels] = scaler.fit_transform(inspections[labels].values)
+    joblib.dump(scaler, open(f"{MODEL_OUTPUT_PATH}/{SCALER_NAME}", "wb"))
 
     """
     ENCODE CATEGORICAL FEATURES
@@ -72,7 +79,7 @@ def train(inspections_processed: pd.DataFrame, labels: List[str]):
     joblib.dump(model, open(f"{MODEL_OUTPUT_PATH}/{MODEL_NAME}", "wb"))
 
 def run_workflow():
-    FEATURES_CATEGORICAL = ["business_name", "business_postal_code"]
+    FEATURES_CATEGORICAL = ["business_postal_code"]
     FEATURES_EMBEDDINGS = ["violation_description"]
     LABELS = ["inspection_score", "lowest_score"]
     
