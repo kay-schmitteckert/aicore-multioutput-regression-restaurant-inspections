@@ -36,7 +36,7 @@ spec:
               none: {}
       container:
         # URL of Docker image that was previously uploaded to Docker Hub.
-        image: "docker.io/kayschmitteckert/inspection-mo-regression-cpu:0.0.1"
+        image: <DOCKER-IMAGE-REPO>
         imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:
