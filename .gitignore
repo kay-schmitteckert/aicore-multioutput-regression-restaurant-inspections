@@ -165,6 +165,7 @@ cython_debug/
 # Directories for debugging locally.
 /data/
 /models/
+*:Zone.Identifier
 
 
 ### Linux ###

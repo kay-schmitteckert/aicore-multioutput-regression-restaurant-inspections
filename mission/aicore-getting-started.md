@@ -1,6 +1,11 @@
-# Get started with AI Core
+# Get started with SAP AI Core
 
-SAP AI Core will play an important role during this mission. Therefore, before proceeding
+SAP AI Core is part of the services portfolio that SAP BTP provides. It is used to
+train a machine learning model and to deploy the model in the form of a service running
+in the cloud. Clients can then send data to the service endpoint and will receive the model's
+prediction based on that data as a response. Both model training and serving happen in a scalable and for the most part hyperscaler-agnostic way.
+
+AI Core will play an important role during this mission. Therefore, before proceeding
 with the mission, it is recommended to first get a basic understanding of AI Core.
 
 Skim through the [AI Core
