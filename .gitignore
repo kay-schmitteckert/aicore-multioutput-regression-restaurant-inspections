@@ -163,7 +163,6 @@ cython_debug/
 /resources/
 /training_output.json
 # Directories for debugging locally.
-/data/
 /models/
 *:Zone.Identifier
 
