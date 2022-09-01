@@ -27,13 +27,13 @@ To upload the dataset to your AWS S3 bucket, paste and edit the following comman
 terminal so that the `<bucket-name>` matches the name of your bucket.
 
 ```bash
-aws s3 cp inspections.csv s3://<bucket-name>/app/data/
+aws s3 cp inspections.csv s3://<BUCKET-NAME>/app/data/
 ```
 
 To double check whether the dataset was uploaded successfully, run:
 
 ```bash
-aws s3 ls s3://<bucket-name>/app/data/
+aws s3 ls s3://<BUCKET-NAME>/app/data/
 ```
 
 The output of the command should include *inspections.csv*

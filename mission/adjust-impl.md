@@ -7,7 +7,7 @@ In case your dataset is very similar to it, and you are going to use the same
 python libraries, do the following:
 
 - Upload your own dataset to the same Amazon S3 bucket
-- Inside the train.py file than one uses for training, add the feature names and label names from your dataset to the
+- Inside the *train.py* file than one uses for training, add the feature names and label names from your dataset to the
   according lists at the beginning of the *run_workflow* file. For example the name of
   a categorical feature goes into the `FEATURES_CATEGORICAL` list. Do the same for the
   lists of feature names in the serving.py file.
