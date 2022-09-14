@@ -29,7 +29,7 @@ Follow the steps in the wizard to finish which triggers the setup of the subacco
 After the Booster succeeded, navigate to your freshly created subaccount by clicking on 'Navigate to Subaccount'
 <img src="resources/booster/booster_success.png" alt="Success of Booster" width="400px">
 
-The Overview of the Subaccount gives you a summary like meta data or spaces within the subaccount.
+The Overview of the Subaccount gives you a summary like metadata or spaces within the subaccount.
 <img src="resources/booster/subaccount_overview.png" alt="Success of Booster" width="800px">
 
 Navigate to the _Instances and Subscriptions_ to see the subscription to SAP AI Launchpad.
