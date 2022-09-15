@@ -34,6 +34,13 @@ assert train_config_resp.message == 'Configuration created'
 print("Configuration created for running the training")
 ```
 
+If the configuration has been created successfully, the configuration should also be
+listed in AI Launchpad under the ML Operations > Configurations tab. Make sure to select
+your respective resource group for this mission beforehand in the Workspaces tab on the
+left.
+
+![Training Configuration](resources/config-train.png)
+
 ## Training Execution
 
 Now it is time to finally initiate the training:
@@ -66,4 +73,7 @@ if execution.status == Status.COMPLETED:
         json.dump(output, fp)
 ```
 
-AI Core will now take some time to finish the training of the model.
+AI Core will now take some time to finish the training of the model. Once it has finished
+the execution should be also marked as finished in AI Launchpad.
+
+![Execution finished](resources/execution-train.png)

@@ -43,6 +43,12 @@ pprint(vars(serve_config_resp))
 print("configuration for serving the model created")
 ```
 
+If the serving configuration has been created successfully, it should show
+in AI Launchpad under the ML Operations > Configurations tab where the
+Training configuration has been listed previously as well.
+
+![Serving configuration](resources/config-serve.png)
+
 ## Deploy Inference Service
 
 AI Core can now use the information from the serving configuration to finally deploy the
@@ -69,4 +75,8 @@ while status != Status.RUNNING and status != Status.DEAD:
 time.sleep(10)
 ```
 
-AI Core will need some time now to finish the deployment of the inference service.
+AI Core will need some time now to finish the deployment of the inference service. Once
+the inference service has been deployed the deployment should be marked as *RUNNING* in AI
+Launchpad under the Deployments tab.
+
+![Deployment running](resources/deployment-running.png)
