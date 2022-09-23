@@ -13,3 +13,6 @@ python libraries, do the following:
   lists of feature names in the serving.py file.
 - Still in *train.py*, make sure to change the value of the `DATASET_NAME` variable to the name of the
   dataset that you uploaded to the S3 bucket in the previous step.
+
+You can find more general instructions on how to adjust the repository of this
+mission to your use case [here](https://github.com/kay-schmitteckert/aicore-multioutput-regression-restaurant-inspections/tree/mission#boilerplate-ai-core).
