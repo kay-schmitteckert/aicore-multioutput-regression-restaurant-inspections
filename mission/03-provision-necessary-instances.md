@@ -15,4 +15,4 @@ creating an instance only for AI Core, perform the same steps also for the Objec
 <img src="resources/services/create_instance.png" alt="Create service instance from Marketplace" width="800px">
 
 ### 3. Create a Service Key
-<img src="resources/services/create_service_key.png" alt=""Create a Service Key" width="800px">
+<img src="resources/services/create_service_key.png" alt="Create a Service Key" width="800px">
