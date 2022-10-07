@@ -3,34 +3,34 @@
 
 ## Create Subaccount with SAP AI Launchpad through Booster
 Once the prerequisites are met, you can get started to create a subaccount with a subscription to SAP AI Launchpad through the help of a Booster. For this, join your global account and navigate to Boosters. Search for 'AI' to get a list of all available Boosters related to AI.
-<img src="resources/booster/booster_ai_overview.png" alt="Booster Overview" width="800px">
+![Booster Overview](resources/booster/booster_ai_overview.png)
 
 Choose the Booster for SAP AI Launchpad with the title 'Set Up Account for SAP AI Launchpad' and start it.
-<img src="resources/booster/booster_ai_launchpad.png" alt="AI Launchpad Booster" width="800px">
+![AI Launchpad Booster](resources/booster/booster_ai_launchpad.png)
 
 Follow the steps in the wizard to finish which triggers the setup of the subaccount with some additional configuration necessary to activate SAP AI Launchpad.
 
 #### Step 1: Check Prerequisites
-<img src="resources/booster/booster_step1.png" alt="Booster Step 1" width="800px">
+![Booster Step 1](resources/booster/booster_step1.png)
 
 #### Step 2: Select Scenario
-<img src="resources/booster/booster_step2.png" alt="Booster Step 2" width="800px">
+![Booster Step 2](resources/booster/booster_step2.png)
 
 #### Step 3: Configue Subaccount
-<img src="resources/booster/booster_step3.png" alt="Booster Step 3" width="800px">
+![Booster Step 3](resources/booster/booster_step3.png)
 
 #### Step 4: Review
-<img src="resources/booster/booster_step4.png" alt="Booster Step 4" width="800px">
+![Booster Step 4](resources/booster/booster_step4.png)
 
 #### Progress of Booster
-<img src="resources/booster/booster_progress.png" alt="Progress of Booster" width="400px">
+![Progress of Booster](resources/booster/booster_progress.png)
 
 ## Inspect Subaccount
 After the Booster succeeded, navigate to your freshly created subaccount by clicking on 'Navigate to Subaccount'
-<img src="resources/booster/booster_success.png" alt="Success of Booster" width="400px">
+![Success of Booster](resources/booster/booster_success.png)
 
 The Overview of the Subaccount gives you a summary like metadata or spaces within the subaccount.
-<img src="resources/booster/subaccount_overview.png" alt="Success of Booster" width="800px">
+![Subaccount Overview](resources/booster/subaccount_overview.png)
 
 Navigate to the _Instances and Subscriptions_ to see the subscription to SAP AI Launchpad.
-<img src="resources/booster/instances_overview.png" alt="Instances & Subscriptions" width="800px">
+![Instances & Subscriptions](resources/booster/instances_overview.png)
